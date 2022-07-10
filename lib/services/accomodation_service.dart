@@ -1,11 +1,12 @@
-import 'package:atypik_house_flutter/models/user.dart';
 import 'package:atypik_house_flutter/services/auth_service.dart';
 import 'package:dio/dio.dart';
 
-class UserService {
-  UserService._();
+import '../models/accomodation.dart';
 
-  static final instance = UserService._();
+class AccomodationService {
+  AccomodationService._();
+
+  static final instance = AccomodationService._();
 
   late Dio _dio;
 
@@ -19,10 +20,10 @@ class UserService {
     }, baseUrl: _baseUrl));
   }
 
-  //recuperer les utilisateurs
-  Future<List<User>> getUsers() async {
-    final response = await _dio.get<List>('/users');
-    final users = response.data!.map((d) => User.fromJson(d)).toList();
-    return users;
+  Future<List<Accomodation>> getAccomodations() async {
+    final response = await _dio.get('/accomodations');
+    final hebergements =
+        response.data!.map((d) => Accomodation.fromJson(d)).toList();
+    return hebergements;
   }
 }

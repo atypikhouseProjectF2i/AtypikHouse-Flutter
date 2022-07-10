@@ -1,16 +1,23 @@
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+import '../services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.title}) : super(key: key);
   final String title;
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final loginTEC = TextEditingController();
+  final passwordTEC = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: loginTEC,
                       maxLines: 1,
                       decoration: InputDecoration(
                         hintText: 'Votre email',
@@ -76,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     TextFormField(
+                      controller: passwordTEC,
                       maxLines: 1,
                       obscureText: true,
                       decoration: InputDecoration(
@@ -104,9 +113,15 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     ElevatedButton(
-                      onPressed: (() {
-                        context.go('/history');
-                      }),
+                      onPressed: () async {
+                        final loginResult = await AuthService.instance.login(login: loginTEC.text, password: passwordTEC.text);
+                        if (loginResult) {
+                          context.go('/history');
+                        } else {
+                          // TODO: error message
+                        }
+                        
+                      },
                       /*style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(255, 122, 84, 46)),
@@ -122,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                               25, 15, 25, 15) //content padding inside button
                           ),
                       child: const Text(
-                        'Se connecter',
+                        'Se Connecter',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
