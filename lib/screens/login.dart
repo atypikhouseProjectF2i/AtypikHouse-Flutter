@@ -13,10 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final loginTEC = TextEditingController();
   final passwordTEC = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +112,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        final loginResult = await AuthService.instance.login(login: loginTEC.text, password: passwordTEC.text);
+                        // final loginResult = await AuthService.instance.login(login: loginTEC.text, password: passwordTEC.text);
+                        final loginResult = await AuthService.instance.login(
+                            login: "user0@gmail.com", password: "mypassword");
                         if (loginResult) {
                           context.go('/history');
                         } else {
                           // TODO: error message
                         }
-                        
                       },
                       /*style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(

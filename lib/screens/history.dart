@@ -2,8 +2,8 @@ import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
-import '../models/accomodation.dart';
-import '../services/accomodation_service.dart';
+import '../models/accommodation.dart';
+import '../services/accommodation_service.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key, required this.title}) : super(key: key);
@@ -14,7 +14,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  List<Accomodation> _accomodations = [];
+  List<Accommodation> _accommodations = [];
 
   @override
   void initState() {
@@ -22,10 +22,10 @@ class _HistoryPageState extends State<HistoryPage> {
 
     Future.microtask(() async {
       final requestResult =
-          await AccomodationService.instance.getAccomodations();
+          await AccommodationService.instance.getAccommodations();
 
       setState(() {
-        _accomodations = requestResult;
+        _accommodations = requestResult;
       });
     });
   }
@@ -102,19 +102,19 @@ class _HistoryPageState extends State<HistoryPage> {
         ],
       );
     } else if (_selectedIndex == 1) {
-      if (false == true) {
-        return Center(child: Text("Vous n'êtes pas locataire !"));
-      }
+      // if (false == true) {
+      //   return Center(child: Text("Vous n'êtes pas locataire !"));
+      // }
 
-      if (_accomodations.isEmpty)
-        return Center(
-          child: CircularProgressIndicator(),
-        );
+      // if (_accommodations.isEmpty)
+      //   return Center(
+      //     child: CircularProgressIndicator(),
+      //   );
 
       return ListView.builder(
-        itemCount: _accomodations.length,
-        itemBuilder: (contexct, index) {
-          final accomodation = _accomodations[index];
+        itemCount: _accommodations.length,
+        itemBuilder: (context, index) {
+          final accommodation = _accommodations[index];
 
           return ListTile(
             onTap: () => {},
@@ -122,60 +122,60 @@ class _HistoryPageState extends State<HistoryPage> {
             //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
             leading:
                 Image.network('https://source.unsplash.com/random/300×150'),
-            title: Text('accomodation.title'),
-            subtitle: Text('accomodation.subtitle',
-                style: TextStyle(
+            title: Text(accommodation.name),
+            subtitle: Text(accommodation.price,
+                style: const TextStyle(
                     color: Color.fromARGB(255, 103, 148, 54),
                     fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
+            trailing: const Icon(Icons.arrow_forward_ios),
           );
         },
       );
 
-      return ListView(
-        shrinkWrap: true,
-        children: [
-          ListTile(
-            onTap: () => {},
-            contentPadding: EdgeInsets.all(10),
-            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-            leading:
-                Image.network("https://source.unsplash.com/random/300×150"),
-            title: Text('titre hébergement'),
-            subtitle: Text('en cours',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 103, 148, 54),
-                    fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
-          ListTile(
-            onTap: () => {},
-            contentPadding: EdgeInsets.all(10),
-            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-            leading:
-                Image.network("https://source.unsplash.com/random/300×150"),
-            title: Text('titre hébergement'),
-            subtitle: Text('terminée',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 143, 142, 142),
-                    fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
-          ListTile(
-            onTap: () => {},
-            contentPadding: EdgeInsets.all(10),
-            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-            leading:
-                Image.network("https://source.unsplash.com/random/300×150"),
-            title: Text('titre hébergement'),
-            subtitle: Text('à venir',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 122, 84, 46),
-                    fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
-        ],
-      );
+      // return ListView(
+      //   shrinkWrap: true,
+      //   children: [
+      //     ListTile(
+      //       onTap: () => {},
+      //       contentPadding: EdgeInsets.all(10),
+      //       //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      //       leading:
+      //           Image.network("https://source.unsplash.com/random/300×150"),
+      //       title: Text('titre hébergement'),
+      //       subtitle: Text('en cours',
+      //           style: TextStyle(
+      //               color: Color.fromARGB(255, 103, 148, 54),
+      //               fontWeight: FontWeight.bold)),
+      //       trailing: Icon(Icons.arrow_forward_ios),
+      //     ),
+      //     ListTile(
+      //       onTap: () => {},
+      //       contentPadding: EdgeInsets.all(10),
+      //       //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      //       leading:
+      //           Image.network("https://source.unsplash.com/random/300×150"),
+      //       title: Text('titre hébergement'),
+      //       subtitle: Text('terminée',
+      //           style: TextStyle(
+      //               color: Color.fromARGB(255, 143, 142, 142),
+      //               fontWeight: FontWeight.bold)),
+      //       trailing: Icon(Icons.arrow_forward_ios),
+      //     ),
+      //     ListTile(
+      //       onTap: () => {},
+      //       contentPadding: EdgeInsets.all(10),
+      //       //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+      //       leading:
+      //           Image.network("https://source.unsplash.com/random/300×150"),
+      //       title: Text('titre hébergement'),
+      //       subtitle: Text('à venir',
+      //           style: TextStyle(
+      //               color: Color.fromARGB(255, 122, 84, 46),
+      //               fontWeight: FontWeight.bold)),
+      //       trailing: Icon(Icons.arrow_forward_ios),
+      //     ),
+      //   ],
+      // );
     }
   }
 }

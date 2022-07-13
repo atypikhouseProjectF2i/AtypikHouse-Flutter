@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'accomodation_service.dart';
+import 'accommodation_service.dart';
 
 class AuthService {
   AuthService._();
@@ -20,7 +20,7 @@ class AuthService {
       final token = result.data['token'] as String;
       _storage.write(key: _jwtKey, value: token);
 
-      AccomodationService.instance.initWithToken(token);
+      AccommodationService.instance.initWithToken(token);
 
       return true;
     } catch (e) {
