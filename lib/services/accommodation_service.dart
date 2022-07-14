@@ -24,14 +24,10 @@ class AccommodationService {
   Future<List<Accommodation>> getAccommodations() async {
     final response = await _dio.get('/accommodations');
     final hebergements =
-        // response.data!.map((d) => Accommodation.fromJson(d)).toList();
-        response.data!.map((d) {
-      print(response.data);
-      log(response.data);
-      debugPrint(response.data);
-
-      return Accommodation.fromJson(d);
-    }).toList();
+        response.data!.map((d) => Accommodation.fromJson(d)).toList();
+    //     response.data!.map((d) {
+    //   return Accommodation.fromJson(d);
+    // }).toList();
 
     return hebergements;
   }
