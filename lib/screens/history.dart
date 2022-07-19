@@ -73,38 +73,33 @@ class _HistoryPageState extends State<HistoryPage> {
 
   listWidget() {
     if (_selectedIndex == 0) {
-      if (true == true) {
-        return Center(child: Text("Vous n'êtes pas propriétaire !"));
-      }
-      return ListView(
-        shrinkWrap: true,
-        children: [
-          ListTile(
+      // if (true == true) {
+      //   return Center(child: Text("Vous n'êtes pas propriétaire !"));
+      // }
+      return ListView.builder(
+        itemCount: _accommodations.length,
+        itemBuilder: (context, index) {
+          final accommodation = _accommodations[index];
+
+          return ListTile(
             onTap: () => {},
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: const EdgeInsets.all(10),
             //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
             leading:
-                Image.network("https://source.unsplash.com/random/300×150"),
-            title: Text('titre hébergement'),
-            subtitle: Text('terminée'),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
-          ListTile(
-            onTap: () => {},
-            contentPadding: EdgeInsets.all(10),
-            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-            leading:
-                Image.network("https://source.unsplash.com/random/300×150"),
-            title: Text('titre hébergement'),
-            subtitle: Text('terminée'),
-            trailing: Icon(Icons.arrow_forward_ios),
-          ),
-        ],
+                Image.network('https://source.unsplash.com/random/300×150'),
+            title: Text(accommodation.name),
+            subtitle: Text(accommodation.price.toString(),
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 103, 148, 54),
+                    fontWeight: FontWeight.bold)),
+            trailing: const Icon(Icons.arrow_forward_ios),
+          );
+        },
       );
     } else if (_selectedIndex == 1) {
-      // if (false == true) {
-      //   return Center(child: Text("Vous n'êtes pas locataire !"));
-      // }
+      if (true == true) {
+        return Center(child: Text("Vous n'êtes pas locataire !"));
+      }
 
       // if (_accommodations.isEmpty)
       //   return Center(
@@ -123,7 +118,7 @@ class _HistoryPageState extends State<HistoryPage> {
             leading:
                 Image.network('https://source.unsplash.com/random/300×150'),
             title: Text(accommodation.name),
-            subtitle: Text(accommodation.price,
+            subtitle: Text(accommodation.price.toString(),
                 style: const TextStyle(
                     color: Color.fromARGB(255, 103, 148, 54),
                     fontWeight: FontWeight.bold)),

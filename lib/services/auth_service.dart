@@ -1,6 +1,9 @@
+import 'package:atypik_house_flutter/models/accommodation.dart';
+import 'package:atypik_house_flutter/models/booking.dart';
+import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
+import 'dart:developer';
 import 'accommodation_service.dart';
 
 class AuthService {
@@ -14,13 +17,17 @@ class AuthService {
   static const _jwtKey = 'JWT_TOKEN_KEY';
 
   Future<bool> login({required String login, required String password}) async {
+   
+
     try {
       final result = await _dio.post('http://localhost:8000/api/login',
           data: {'username': login, 'password': password});
       final token = result.data['token'] as String;
       _storage.write(key: _jwtKey, value: token);
 
+      UserService.instance.initWithToken(token);
       AccommodationService.instance.initWithToken(token);
+      // fichier auth service dans la fonction login
 
       return true;
     } catch (e) {

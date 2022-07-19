@@ -1,3 +1,4 @@
+import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -116,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                         final loginResult = await AuthService.instance.login(
                             login: "user0@gmail.com", password: "mypassword");
                         if (loginResult) {
+                          await UserService.instance.getUser();
                           context.go('/history');
                         } else {
                           // TODO: error message

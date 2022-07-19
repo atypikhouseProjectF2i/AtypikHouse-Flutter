@@ -6,12 +6,11 @@ part 'accommodation.g.dart';
 @freezed
 class Accommodation with _$Accommodation {
   const factory Accommodation({
-    required String id,
+    required int id,
     required String name,
-    required String price,
-    required int user_id,
+    required int price,
+    // required int user_id,
   }) = _Accommodation;
- 
-  factory Accommodation.fromJson(Map<String, dynamic> json) =>
-      _$AccommodationFromJson(json);
+
+  factory Accommodation.fromJson(json) => _$AccommodationFromJson(json);
 }

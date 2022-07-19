@@ -20,10 +20,9 @@ Accommodation _$AccommodationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Accommodation {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
-  int get user_id => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,7 @@ abstract class $AccommodationCopyWith<$Res> {
   factory $AccommodationCopyWith(
           Accommodation value, $Res Function(Accommodation) then) =
       _$AccommodationCopyWithImpl<$Res>;
-  $Res call({String id, String name, String price, int user_id});
+  $Res call({int id, String name, int price});
 }
 
 /// @nodoc
@@ -53,13 +52,12 @@ class _$AccommodationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
-    Object? user_id = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -67,10 +65,6 @@ class _$AccommodationCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
-      user_id: user_id == freezed
-          ? _value.user_id
-          : user_id // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -83,7 +77,7 @@ abstract class _$$_AccommodationCopyWith<$Res>
           _$_Accommodation value, $Res Function(_$_Accommodation) then) =
       __$$_AccommodationCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String price, int user_id});
+  $Res call({int id, String name, int price});
 }
 
 /// @nodoc
@@ -102,13 +96,12 @@ class __$$_AccommodationCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? price = freezed,
-    Object? user_id = freezed,
   }) {
     return _then(_$_Accommodation(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -116,10 +109,6 @@ class __$$_AccommodationCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
-              as String,
-      user_id: user_id == freezed
-          ? _value.user_id
-          : user_id // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -129,26 +118,21 @@ class __$$_AccommodationCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Accommodation implements _Accommodation {
   const _$_Accommodation(
-      {required this.id,
-      required this.name,
-      required this.price,
-      required this.user_id});
+      {required this.id, required this.name, required this.price});
 
   factory _$_Accommodation.fromJson(Map<String, dynamic> json) =>
       _$$_AccommodationFromJson(json);
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
-  final String price;
-  @override
-  final int user_id;
+  final int price;
 
   @override
   String toString() {
-    return 'Accommodation(id: $id, name: $name, price: $price, user_id: $user_id)';
+    return 'Accommodation(id: $id, name: $name, price: $price)';
   }
 
   @override
@@ -158,8 +142,7 @@ class _$_Accommodation implements _Accommodation {
             other is _$_Accommodation &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.user_id, user_id));
+            const DeepCollectionEquality().equals(other.price, price));
   }
 
   @JsonKey(ignore: true)
@@ -168,8 +151,7 @@ class _$_Accommodation implements _Accommodation {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(user_id));
+      const DeepCollectionEquality().hash(price));
 
   @JsonKey(ignore: true)
   @override
@@ -184,22 +166,19 @@ class _$_Accommodation implements _Accommodation {
 
 abstract class _Accommodation implements Accommodation {
   const factory _Accommodation(
-      {required final String id,
+      {required final int id,
       required final String name,
-      required final String price,
-      required final int user_id}) = _$_Accommodation;
+      required final int price}) = _$_Accommodation;
 
   factory _Accommodation.fromJson(Map<String, dynamic> json) =
       _$_Accommodation.fromJson;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override
-  String get price;
-  @override
-  int get user_id;
+  int get price;
   @override
   @JsonKey(ignore: true)
   _$$_AccommodationCopyWith<_$_Accommodation> get copyWith =>

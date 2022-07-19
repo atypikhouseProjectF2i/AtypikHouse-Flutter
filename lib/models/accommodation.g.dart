@@ -8,10 +8,9 @@ part of 'accommodation.dart';
 
 _$_Accommodation _$$_AccommodationFromJson(Map<String, dynamic> json) =>
     _$_Accommodation(
-      id: json['id'] as String,
+      id: json['id'] as int,
       name: json['name'] as String,
-      price: json['price'] as String,
-      user_id: json['user_id'] as int,
+      price: json['price'] as int,
     );
 
 Map<String, dynamic> _$$_AccommodationToJson(_$_Accommodation instance) =>
@@ -19,5 +18,4 @@ Map<String, dynamic> _$$_AccommodationToJson(_$_Accommodation instance) =>
       'id': instance.id,
       'name': instance.name,
       'price': instance.price,
-      'user_id': instance.user_id,
     };

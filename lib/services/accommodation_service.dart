@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:atypik_house_flutter/services/auth_service.dart';
+import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:developer';
@@ -18,16 +21,17 @@ class AccommodationService {
   initWithToken(String token) {
     _dio = Dio(BaseOptions(headers: {
       'Authorization': 'Bearer ${AuthService.instance.token}',
-    }, baseUrl: _baseUrl));
+    }, baseUrl: _baseUrl, responseType: ResponseType.plain));
   }
 
   Future<List<Accommodation>> getAccommodations() async {
     final response = await _dio.get('/accommodations');
+
+    var accommodations = jsonDecode(response.data)['hydra:member'] as List;
+
+    //log(xx[0].toString());
     final hebergements =
-        response.data!.map((d) => Accommodation.fromJson(d)).toList();
-    //     response.data!.map((d) {
-    //   return Accommodation.fromJson(d);
-    // }).toList();
+        accommodations.map((d) => Accommodation.fromJson(d)).toList();
 
     return hebergements;
   }
