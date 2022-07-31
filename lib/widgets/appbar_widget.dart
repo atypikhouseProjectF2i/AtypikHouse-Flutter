@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({Key? key}) : super(key: key);
@@ -17,9 +18,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.notifications),
           color: Color.fromARGB(255, 14, 64, 45),
           tooltip: 'Notifications',
-          onPressed: () {
-
-          },
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: const Icon(Icons.person),
+          color: Color.fromARGB(255, 14, 64, 45),
+          tooltip: 'Profile',
+          onPressed: () {},
         ),
       ],
     );

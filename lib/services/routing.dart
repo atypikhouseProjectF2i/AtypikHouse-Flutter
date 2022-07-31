@@ -1,5 +1,6 @@
 import 'package:atypik_house_flutter/screens/history.dart';
 import 'package:atypik_house_flutter/screens/login.dart';
+import 'package:atypik_house_flutter/screens/profile.dart';
 import 'package:go_router/go_router.dart';
 
 class Routing {
@@ -13,6 +14,10 @@ class Routing {
           path: '/history',
           name: 'history',
           builder: (context, state) => HistoryPage(title: "History")),
+      GoRoute(
+          path: '/profile',
+          name: 'profile',
+          builder: (context, state) => ProfilePage(title: "Profile")),
     ]);
   }
 }
