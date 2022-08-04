@@ -17,10 +17,9 @@ class AuthService {
   static const _jwtKey = 'JWT_TOKEN_KEY';
 
   Future<bool> login({required String login, required String password}) async {
-   
-
     try {
-      final result = await _dio.post('http://localhost:8000/api/login',
+      final result = await _dio.post(
+          'https://dsp-devo20-ecs-yl-am-ee.fr/api/public/api/login',
           data: {'username': login, 'password': password});
       final token = result.data['token'] as String;
       _storage.write(key: _jwtKey, value: token);
@@ -35,6 +34,14 @@ class AuthService {
     }
 
     return false;
+  }
+
+  Future<bool> logout() async {
+    _storage.delete(key: _jwtKey);
+    const token = "";
+    UserService.instance.initWithToken(token);
+    AccommodationService.instance.initWithToken(token);
+    return true;
   }
 
   Future<String?> get token {

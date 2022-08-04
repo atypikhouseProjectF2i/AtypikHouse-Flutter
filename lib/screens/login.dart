@@ -7,8 +7,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const LoginPage({Key? key}) : super(key: key);
+
+  final String title = "Login";
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -31,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: Image.network(
-                    "http://localhost:4200/assets/images/logo.png"),
+                    "https://dsp-devo20-ecs-yl-am-ee.fr/assets/images/logo.png"),
               ),
               const SizedBox(
                 height: 50,
@@ -117,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                         final loginResult = await AuthService.instance.login(
                             login: "user0@gmail.com", password: "mypassword");
                         if (loginResult) {
-                          await UserService.instance.getUser();
+                          // await UserService.instance.getUser();
                           context.go('/history');
                         } else {
                           // TODO: error message

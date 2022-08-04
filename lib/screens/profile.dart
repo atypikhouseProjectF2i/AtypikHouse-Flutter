@@ -1,3 +1,4 @@
+import 'package:atypik_house_flutter/models/user.dart';
 import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
 import 'package:go_router/go_router.dart';
@@ -7,43 +8,102 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../services/auth_service.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const ProfilePage({Key? key}) : super(key: key);
+  final String title = "Profil";
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  User? _user = null;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      final User? user = await UserService.instance.getUser();
+
+      if (user == null) {
+        context.go("/history");
+        return;
+      }
+      setState(() {
+        _user = user;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBarWidget(title: widget.title, isProfileIcon: false),
         body: Container(
+          alignment: Alignment.center,
           padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(10),
-                child: Image.network(
-                    "http://localhost:4200/assets/images/logo.png"),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              const Text(
-                'Profile',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 40,
+              Text(
+                'Nom : ${_user?.name}',
+                style: const TextStyle(
+                  fontSize: 20,
                   //color: Color.fromARGB(255, 14, 64, 45),
-                  color: Color.fromARGB(255, 103, 148, 54),
+                  color: Color.fromARGB(255, 0, 0, 0),
                 ),
               ),
               const SizedBox(
                 height: 60,
+              ),
+              Text(
+                'Prénom : ${_user?.firstname}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  //color: Color.fromARGB(255, 14, 64, 45),
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              Text(
+                'Email : ${_user?.email}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  //color: Color.fromARGB(255, 14, 64, 45),
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  final logoutResult = await AuthService.instance.logout();
+                  if (logoutResult) {
+                    context.go('/');
+                  } else {
+                    // TODO: error message
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(
+                        255, 122, 84, 46), //background color of button
+                    //border width and color
+                    shape: RoundedRectangleBorder(
+                        //to set border radius to button
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: EdgeInsets.fromLTRB(
+                        25, 15, 25, 15) //content padding inside button
+                    ),
+                child: const Text(
+                  'Déconnexion',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ],
           ),

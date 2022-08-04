@@ -13,7 +13,7 @@ class UserService {
 
   late Dio _dio;
 
-  static const _baseUrl = 'http://localhost:8000/api';
+  static const _baseUrl = 'https://dsp-devo20-ecs-yl-am-ee.fr/api/public/api';
 
   // package à tester pour parsing: retrofit
 
@@ -35,7 +35,7 @@ class UserService {
       // print(userData);
 
       final user = User.fromJson(userData);
-
+      // print(user);
       return user;
     } on DioError catch (error) {
       print(error.requestOptions.headers);

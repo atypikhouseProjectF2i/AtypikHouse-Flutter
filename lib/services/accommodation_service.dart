@@ -14,13 +14,13 @@ class AccommodationService {
 
   late Dio _dio;
 
-  static const _baseUrl = 'http://localhost:8000/api';
+  static const _baseUrl = 'https://dsp-devo20-ecs-yl-am-ee.fr/api/public/api';
 
   // package à tester pour parsing: retrofit
 
   initWithToken(String token) {
     _dio = Dio(BaseOptions(headers: {
-      'Authorization': 'Bearer ${AuthService.instance.token}',
+      'Authorization': 'Bearer $token',
     }, baseUrl: _baseUrl, responseType: ResponseType.plain));
   }
 
