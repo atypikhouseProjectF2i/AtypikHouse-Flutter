@@ -35,4 +35,22 @@ class AccommodationService {
 
     return hebergements;
   }
+
+  // Future<Accommodation?> getAccommodation(id) async {
+  //   try {
+  //     id = 1;
+  //     final response = await _dio.get('/accommodations/$id');
+
+  //     var accommodationData = jsonDecode(response.data);
+
+  //     print(accommodationData);
+
+  //     final accommodation = Accommodation.fromJson(accommodationData);
+  //     // print(accommodation);
+  //     return accommodation;
+  //   } on DioError catch (error) {
+  //     print(error.requestOptions.headers);
+  //     return null;
+  //   }
+  // }
 }

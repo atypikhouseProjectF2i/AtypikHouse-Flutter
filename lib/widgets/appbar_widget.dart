@@ -58,6 +58,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   Widget showNotificationIcon(context) {
     if (isNotificationIcon) {
+      // notification active color
+      // color = Color.fromARGB(255, 103, 148, 54);
       return IconButton(
         icon: const Icon(Icons.notifications),
         color: const Color.fromARGB(255, 14, 64, 45),

@@ -1,7 +1,9 @@
+import 'package:atypik_house_flutter/screens/details.dart';
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-
+import 'package:atypik_house_flutter/screens/details.dart';
 import '../models/accommodation.dart';
 import '../services/accommodation_service.dart';
 
@@ -16,6 +18,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   List<Accommodation> _accommodations = [];
 
+  get onDidReceiveLocalNotification => null;
   @override
   void initState() {
     super.initState();
@@ -80,37 +83,14 @@ class _HistoryPageState extends State<HistoryPage> {
       // if (true == true) {
       //   return Center(child: Text("Vous n'êtes pas propriétaire !"));
       // }
-      return ListView.builder(
-        itemCount: _accommodations.length,
-        itemBuilder: (context, index) {
-          final accommodation = _accommodations[index];
+      return showProprietaireList(_accommodations);
+      // return ListView.builder(
+      //   itemCount: _accommodations.length,
+      //   itemBuilder: (context, index) {
+      //     final accommodation = _accommodations[index];
 
-          return ListTile(
-            onTap: () => {context.push('/details')},
-            contentPadding: const EdgeInsets.all(10),
-            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-            leading: Image.network(
-                'https://dsp-devo20-ecs-yl-am-ee.fr/api/public//images/accommodations/bulle-62d97f3e27370367616176.jpg'),
-            title: Text(accommodation.name),
-            subtitle: const Text("EN COURS",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 103, 148, 54),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12)),
-            // subtitle: const Text("A VENIR",
-            //     style:  TextStyle(
-            //         color: Color.fromARGB(255, 39, 108, 255),
-            //         fontWeight: FontWeight.bold,
-            //         fontSize: 12)),
-            // subtitle: const Text("TERMINÉE",
-            //     style:  TextStyle(
-            //         color: Color.fromARGB(255, 122, 122, 123),
-            //         fontWeight: FontWeight.bold,
-            //         fontSize: 12)),
-            trailing: const Icon(Icons.arrow_forward_ios),
-          );
-        },
-      );
+      //   },
+      // );
     } else if (_selectedIndex == 1) {
       if (true == true) {
         return const Center(child: Text("Vous n'êtes pas locataire !"));
@@ -186,6 +166,49 @@ class _HistoryPageState extends State<HistoryPage> {
       //     ),
       //   ],
       // );
+    }
+  }
+
+  Widget showProprietaireList(data) {
+    if (!data.isEmpty) {
+      return ListView.builder(
+        itemCount: _accommodations.length,
+        itemBuilder: (context, index) {
+          final accommodation = _accommodations[index];
+          return ListTile(
+            // onTap: () => {context.push('/details?details=$accommodation')},
+            onTap: () => {context.push('/details', extra: accommodation)},
+
+            contentPadding: const EdgeInsets.all(10),
+            //contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+            leading: Image.network(
+                'https://dsp-devo20-ecs-yl-am-ee.fr/api/public//images/accommodations/bulle-62d97f3e27370367616176.jpg'),
+            title: Text(accommodation.name),
+            subtitle: const Text("EN COURS",
+                style: TextStyle(
+                    color: Color.fromARGB(255, 103, 148, 54),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12)),
+            // subtitle: const Text("A VENIR",
+            //     style:  TextStyle(
+            //         color: Color.fromARGB(255, 39, 108, 255),
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 12)),
+            // subtitle: const Text("TERMINÉE",
+            //     style:  TextStyle(
+            //         color: Color.fromARGB(255, 122, 122, 123),
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 12)),
+            trailing: const Icon(Icons.arrow_forward_ios),
+          );
+        },
+      );
+    } else {
+      return Container(
+        alignment: Alignment.center,
+        // padding: const EdgeInsets.all(20),
+        child: const CircularProgressIndicator(),
+      );
     }
   }
 }

@@ -42,73 +42,81 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Container(
           alignment: Alignment.center,
           padding: const EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'Nom : ${_user?.name}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  //color: Color.fromARGB(255, 14, 64, 45),
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Text(
-                'Prénom : ${_user?.firstname}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  //color: Color.fromARGB(255, 14, 64, 45),
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              Text(
-                'Email : ${_user?.email}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  //color: Color.fromARGB(255, 14, 64, 45),
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final logoutResult = await AuthService.instance.logout();
-                  if (logoutResult) {
-                    context.go('/');
-                  } else {
-                    // TODO: error message
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(
-                        255, 122, 84, 46), //background color of button
-                    //border width and color
-                    shape: RoundedRectangleBorder(
-                        //to set border radius to button
-                        borderRadius: BorderRadius.circular(30)),
-                    padding: EdgeInsets.fromLTRB(
-                        25, 15, 25, 15) //content padding inside button
-                    ),
-                child: const Text(
-                  'Déconnexion',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
+          child: showProfileData(_user),
         ),
       ),
     );
+  }
+
+  Widget showProfileData(data) {
+    if (data != null) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Nom : ${_user?.name}',
+            style: const TextStyle(
+              fontSize: 20,
+              //color: Color.fromARGB(255, 14, 64, 45),
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+          ),
+          const SizedBox(
+            height: 60,
+          ),
+          Text(
+            'Prénom : ${_user?.firstname}',
+            style: const TextStyle(
+              fontSize: 20,
+              //color: Color.fromARGB(255, 14, 64, 45),
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+          ),
+          const SizedBox(
+            height: 60,
+          ),
+          Text(
+            'Email : ${_user?.email}',
+            style: const TextStyle(
+              fontSize: 20,
+              //color: Color.fromARGB(255, 14, 64, 45),
+              color: Color.fromARGB(255, 0, 0, 0),
+            ),
+          ),
+          const SizedBox(
+            height: 60,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final logoutResult = await AuthService.instance.logout();
+              if (logoutResult) {
+                context.go('/');
+              } else {
+                // TODO: error message
+              }
+            },
+            style: ElevatedButton.styleFrom(
+                primary: const Color.fromARGB(
+                    255, 122, 84, 46), //background color of button
+                //border width and color
+                shape: RoundedRectangleBorder(
+                    //to set border radius to button
+                    borderRadius: BorderRadius.circular(30)),
+                padding: const EdgeInsets.fromLTRB(
+                    25, 15, 25, 15) //content padding inside button
+                ),
+            child: const Text(
+              'Déconnexion',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return const CircularProgressIndicator();
+    }
   }
 }

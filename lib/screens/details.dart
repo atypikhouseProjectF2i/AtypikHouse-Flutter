@@ -1,3 +1,4 @@
+import 'package:atypik_house_flutter/models/accommodation.dart';
 import 'package:atypik_house_flutter/models/user.dart';
 import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
@@ -8,13 +9,22 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../services/auth_service.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  DetailsPage({Key? key, Accommodation? this.accommodation}) : super(key: key);
   final String title = "Details";
+  var accommodation;
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() async {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,9 +43,9 @@ class _DetailsPageState extends State<DetailsPage> {
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                "Nom de l'hébergement : ",
-                style: TextStyle(
+              Text(
+                "Nom de l'hébergement : ${widget.accommodation.name}",
+                style: const TextStyle(
                   fontSize: 18,
                   //color: Color.fromARGB(255, 14, 64, 45),
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -44,9 +54,9 @@ class _DetailsPageState extends State<DetailsPage> {
               const SizedBox(
                 height: 20,
               ),
-              const Text(
+              Text(
                 "Statut : ",
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   //color: Color.fromARGB(255, 14, 64, 45),
                   color: Color.fromARGB(255, 0, 0, 0),
@@ -73,6 +83,9 @@ class _DetailsPageState extends State<DetailsPage> {
                   //color: Color.fromARGB(255, 14, 64, 45),
                   color: Color.fromARGB(255, 0, 0, 0),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
             ],
           ),

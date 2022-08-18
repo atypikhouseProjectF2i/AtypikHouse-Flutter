@@ -1,8 +1,10 @@
 import 'package:atypik_house_flutter/services/user_service.dart';
 import 'package:atypik_house_flutter/widgets/appbar_widget.dart';
+import 'package:flutter/gestures.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../services/auth_service.dart';
 
@@ -111,6 +113,24 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(
+                      height: 10,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                          text: "Vous n'avez pas de compte ? ",
+                          children: [
+                            TextSpan(
+                                text: "S'inscrire",
+                                style: TextStyle(color: Colors.blue),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    launchURL(
+                                        "https://dsp-devo20-ecs-yl-am-ee.fr/inscription");
+                                  }),
+                          ],
+                          style: TextStyle(color: Colors.black, fontSize: 13)),
+                    ),
+                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
@@ -125,6 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                           // TODO: error message
                         }
                       },
+
                       /*style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
                             Color.fromARGB(255, 122, 84, 46)),
@@ -157,5 +178,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
