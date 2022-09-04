@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682564861345",
+    "project_id": "atypik-house-b580a",
+    "storage_bucket": "atypik-house-b580a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682564861345:android:8082c996cb4be7b8acdfe0",
+        "android_client_info": {
+          "package_name": "com.example.atypik_house_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682564861345-q2ktm6hdf3bqh559pg73id8icr0p7uuh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXbOECSgDGoeX-iPAMEQBJPRphWGprqqc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682564861345-q2ktm6hdf3bqh559pg73id8icr0p7uuh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

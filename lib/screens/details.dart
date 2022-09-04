@@ -54,9 +54,9 @@ class _DetailsPageState extends State<DetailsPage> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Statut : ",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   //color: Color.fromARGB(255, 14, 64, 45),
                   color: Color.fromARGB(255, 0, 0, 0),

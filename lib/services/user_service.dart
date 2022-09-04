@@ -43,6 +43,26 @@ class UserService {
     }
   }
 
+  Future userIsOwner() async {
+    // final response = await _dio.get('/me');
+
+    try {
+      final response = await _dio.get('/bookings?accommodation.user=1');
+
+      var data = jsonDecode(response.data);
+
+      // print(userData);
+
+      final results = data;
+      print('hi');
+      print(results);
+      return true;
+    } on DioError catch (error) {
+      print(error.requestOptions.headers);
+      return false;
+    }
+  }
+
   //recuperer les utilisateurs
   // Future<List<User>> getUsers() async {
   //   final response = await _dio.get<List>('/users');
